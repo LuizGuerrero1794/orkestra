@@ -2,7 +2,7 @@ import axios from '@/plugins/axios'
 export default {
     getCustomers({commit}, payload){
         commit('SET_OVERLAY', true);
-        console.log(payload) 
+        
         let url = '/api/v1/directory/customers';
 
         if (payload.only_search === 1) {
@@ -11,7 +11,6 @@ export default {
             url = `${url}?page=${payload.page}`
         }
 
-        console.log(url, payload.only_search)
         return axios.get(url).then(response=>{
             if(response.data.status == 'success'){
                 setTimeout(() =>{

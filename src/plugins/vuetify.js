@@ -16,7 +16,8 @@ export default new Vuetify({
                 primary: '#0F335F',
                 danger: '#D50000',
                 warning: 'yellow',
-                success: '#40916c'
+                success: '#40916c',
+                yellow: '#ffeb3b'
             }
         }
     }

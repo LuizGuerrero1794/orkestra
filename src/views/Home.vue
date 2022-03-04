@@ -1,5 +1,5 @@
 <template>
-    <v-content class="mx-6">
+    <div class="mx-6">
         <v-card>
                 <v-toolbar class="primary" dense dark>
                     <v-toolbar-title 
@@ -24,11 +24,12 @@
                                 <v-text-field 
                                     dense outlined
                                     v-model="params.search"
-                                    :rules="[rules.min_3]"
                                     placeholder="Ingresa nombre o celular"
                                     clearable
+                                    hint="MINIMO 3 (TRES) CARACTERES"
                                     @click:clear="clear"
                                 >
+                                    <!--:rules="[rules.min_3]"-->
                                 </v-text-field>
                                 <v-btn 
                                     :icon="$vuetify.breakpoint.mobile"
@@ -94,7 +95,7 @@
                                     <v-card-text>
                                         <v-row>
                                             <v-col cols="6" class="black--text">
-                                                <span class="row justify-center">Celular</span>
+                                                <span class="row justify-center font-weight-bold">Celular</span>
                                                 <span 
                                                     class="row justify-center" 
                                                     v-if="customer.cellphone_format"
@@ -121,7 +122,7 @@
                                                 </span>
                                             </v-col>
                                             <v-col cols="6" class="black--text">
-                                                <span class="row justify-center">Ticket más alto</span>
+                                                <span class="row justify-center font-weight-bold">Ticket más alto</span>
                                                 <span 
                                                     v-if="customer.highest_ticket_amount != '0.00'"
                                                     class="row justify-center"
@@ -139,13 +140,13 @@
                                         <v-divider class="my-4"/>
                                         <v-row>
                                             <v-col cols="6" class="black--text">
-                                                <span class="row justify-center">Periodo sin compra</span>
+                                                <span class="row justify-center font-weight-bold">Periodo sin compra</span>
                                                 <span class="row justify-center">
                                                     {{customer.period_without_purchase_human_format}}
                                                 </span>
                                             </v-col>
                                             <v-col cols="6" class="black--text">
-                                                <span class="row justify-center">Último contacto</span>
+                                                <span class="row justify-center font-weight-bold">Último contacto</span>
                                                 <span class="row justify-center" v-if="customer.last_contact">
                                                     <v-icon 
                                                         color="yellow" 
@@ -176,7 +177,7 @@
                         </v-row>
                 </v-card-text>
         </v-card>
-    </v-content>
+    </div>
 </template>
 <script>
     import { mapState } from 'vuex';
@@ -202,7 +203,8 @@
         watch: {
             'params.search': function(newval){
                 
-                if ( this.$refs.formSearch.validate() && newval != null ) {
+                if ( newval.length >= 3 && newval != null ) {
+                //if ( this.$refs.formSearch.validate() && newval != null ) {
                     this.isBtnActive = false;
                     this.params.only_search = 1;
                     return;
